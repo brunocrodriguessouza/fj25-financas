@@ -7,15 +7,16 @@ import javax.persistence.CascadeType;
 import javax.persistence.EntityManager;
 import javax.persistence.ManyToOne;
 
+import br.com.caelum.financas.dao.MovimentacaoDao;
 import br.com.caelum.financas.modelo.Conta;
 import br.com.caelum.financas.modelo.Movimentacao;
 import br.com.caelum.financas.modelo.TipoMovimentacao;
 import br.com.caelum.financas.util.JPAUtil;
 
-public class TesteMovimentacao {
+public class TestaSalvaMovimentacaoComConta {
 	public static void main(String[] args) {
 		EntityManager manager = new JPAUtil().getEntityManager();
-		manager.getTransaction().begin();
+		MovimentacaoDao dao = new MovimentacaoDao(manager);
 
 		Conta conta = new Conta();
 		conta.setBanco("Banco Santander");
@@ -30,14 +31,17 @@ public class TesteMovimentacao {
 		movimentacao.setValor(new BigDecimal("54"));
 		movimentacao.setTipoMovimentacao(TipoMovimentacao.SAIDA);
 
-		manager.persist(movimentacao);
-		
+		manager.getTransaction().begin();
+		dao.adiciona(movimentacao);
+
 		// Essa linha pode ser substituido pela anotacao
 		// @ManyToOne(cascade=CascadeType.PERSIST)
-//		manager.persist(conta);
+		// manager.persist(conta);
 
 		manager.getTransaction().commit();
 		manager.close();
+
+		System.out.println("Movimentacao gravada com sucesso!");
 
 	}
 }
