@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -24,13 +26,20 @@ public class Movimentacao {
 	@Temporal(TemporalType.TIMESTAMP)
 	private Calendar data;
 
-	@ManyToOne(cascade=CascadeType.PERSIST)
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	private Conta conta;
 
 	private BigDecimal valor;
 
 	@Enumerated(EnumType.STRING)
 	private TipoMovimentacao tipoMovimentacao;
+
+	@PrePersist
+	@PreUpdate
+	public void preAltera() {
+		System.out.println("Atualizando a data da movimentacao");
+		this.setData(Calendar.getInstance());
+	}
 
 	public void setId(Integer id) {
 		this.id = id;

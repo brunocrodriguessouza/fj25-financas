@@ -22,7 +22,7 @@ public class TestaSalvaMovimentacaoComConta {
 		conta.setBanco("Banco Santander");
 		conta.setNumero("99999-9");
 		conta.setAgencia("999");
-		conta.setTitular("Maria");
+		conta.setTitular("Ana Maria");
 
 		Movimentacao movimentacao = new Movimentacao();
 		movimentacao.setConta(conta);
