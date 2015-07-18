@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 
 	<!-- unidade de persistencia com o nome controlefinancas -->
-	<persistence-unit name="controlefinancas">
+	<persistence-unit name="controlefinancas"> 
 		<!-- Implementacao do JPA2, no nosso caso Hibernate -->
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 

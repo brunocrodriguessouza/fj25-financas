@@ -7,30 +7,31 @@ import javax.persistence.Persistence;
 import br.com.caelum.financas.modelo.Conta;
 
 public class TestaInsereConta {
-	
+
 	public static void main(String[] args) {
-		
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("controlefinancas");
-		
+
+		long inicio = System.currentTimeMillis();
+
+		EntityManagerFactory factory = Persistence
+				.createEntityManagerFactory("controlefinancas");
+
 		EntityManager manager = factory.createEntityManager();
-		
+
 		Conta conta = new Conta();
-		conta.setTitular("Bruno Souza");
+		conta.setTitular("Filipe Souza");
 		conta.setBanco("Banco do Brasil");
 		conta.setNumero("123456-6");
 		conta.setAgencia("0999");
-		
+
 		manager.getTransaction().begin();
 		manager.persist(conta);
-		manager.getTransaction().commit();;
+		manager.getTransaction().commit();
 		manager.close();
-		
+
 		System.out.println("Conta gravada com sucesso!");
-		
-		
-		
-		
-		
+
+		long fim = System.currentTimeMillis();
+		System.out.println("Executando em: " + (fim - inicio) + "ms");
 	}
 
 }
